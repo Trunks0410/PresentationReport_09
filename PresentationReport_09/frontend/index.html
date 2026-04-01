@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Demo Strategy + Template Method — Xử lý đơn hàng</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="bg">
+      <div class="grid"></div>
+      <div class="glow glow-1"></div>
+      <div class="glow glow-2"></div>
+    </div>
+
+    <main class="container">
+      <header class="header">
+        <div class="brand">
+          <div class="logo" aria-hidden="true">OP</div>
+          <div>
+            <div class="title">Hệ thống xử lý đơn hàng</div>
+            <div class="subtitle">Demo kết hợp <strong>Strategy</strong> + <strong>Template Method</strong></div>
+          </div>
+        </div>
+        <div class="badge">
+          <span class="dot"></span>
+          <span>API: <code>POST /api/order/process</code></span>
+        </div>
+      </header>
+
+      <section class="layout">
+        <article class="card">
+          <h2>Nhập dữ liệu</h2>
+          <p class="muted">
+            Chọn khuyến mãi (Strategy) và chạy quy trình xử lý cố định (Template Method).
+          </p>
+
+          <form id="orderForm" class="form" novalidate>
+            <div class="field">
+              <label for="price">Giá đơn hàng</label>
+              <div class="inputWrap">
+                <span class="prefix">₫</span>
+                <input
+                  id="price"
+                  name="price"
+                  inputmode="decimal"
+                  autocomplete="off"
+                  placeholder="Ví dụ: 150000"
+                  required
+                />
+              </div>
+              <div class="hint">Nhập số &gt; 0. Có thể dùng dấu <code>.</code> cho phần thập phân.</div>
+            </div>
+
+            <div class="field">
+              <label for="discountType">Chọn loại khuyến mãi</label>
+              <select id="discountType" name="discountType" required>
+                <option value="PERCENTAGE">Giảm 10%</option>
+                <option value="VIP">Khách VIP (giảm 20%)</option>
+                <option value="NONE">Không giảm</option>
+              </select>
+            </div>
+
+            <div id="errorBox" class="error" role="alert" aria-live="polite"></div>
+
+            <button id="submitBtn" class="btn" type="submit">
+              <span class="btnText">Xử lý đơn hàng</span>
+              <span class="spinner" aria-hidden="true"></span>
+            </button>
+          </form>
+        </article>
+
+        <article class="card resultCard" id="resultCard">
+          <div class="resultHeader">
+            <h2>Kết quả</h2>
+            <div class="pill" id="statusPill">Chưa xử lý</div>
+          </div>
+
+          <div class="resultGrid">
+            <div class="metric">
+              <div class="metricLabel">Giá ban đầu</div>
+              <div class="metricValue" id="giaBanDau">—</div>
+            </div>
+            <div class="metric">
+              <div class="metricLabel">Giá sau giảm</div>
+              <div class="metricValue accent" id="giaSauGiam">—</div>
+            </div>
+          </div>
+
+          <div class="stepsWrap">
+            <div class="stepsTitle">Quy trình xử lý</div>
+            <ol id="steps" class="steps">
+              <li class="step pending">✔ Kiểm tra đơn hàng</li>
+              <li class="step pending">✔ Áp dụng giảm giá</li>
+              <li class="step pending">✔ Thanh toán</li>
+              <li class="step pending">✔ Gửi xác nhận</li>
+            </ol>
+          </div>
+
+          <div class="note">
+            <div class="noteTitle">Gợi ý</div>
+            <div class="noteText">
+              Quy trình (Template) luôn cố định 4 bước. Bạn chỉ thay đổi “khuyến mãi” (Strategy) từ dropdown.
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <footer class="footer">
+        <span>Nhóm 09</span>
+      </footer>
+    </main>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
+
